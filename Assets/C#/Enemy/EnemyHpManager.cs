@@ -9,7 +9,7 @@ public class EnemyHpManager : MonoBehaviour
 {
     [SerializeField] private float  hp;//血量
     public float damage;//伤害
-    [FormerlySerializedAs("countattackDelta")] public float countAttackDelta;//计数攻击间隔
+    public float countAttackDelta;//计数攻击间隔
     public float attackDelta;//攻击间隔
        
     private void Update()
