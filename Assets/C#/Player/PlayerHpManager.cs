@@ -11,6 +11,8 @@ public class PlayerHpManager : MonoBehaviour
     [SerializeField] private float maxHp;//最大生命值
     private float  hp;//血量
     public float damage;//伤害
+    public float countAttackDelta;//计数碰撞攻击间隔
+    public float attackDelta;//碰撞攻击间隔
     
     public Text hpText;//血量文本
 
@@ -22,36 +24,35 @@ public class PlayerHpManager : MonoBehaviour
 
     private void Update()
     {
-        
+        if(countAttackDelta > 0)
+            countAttackDelta -= Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //近战怪物攻击玩家
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyHpManager enemy = other.gameObject.GetComponent<EnemyHpManager>();
-            AttackByEnemy(enemy);
+            NearAttackByEnemy(enemy);
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        //近战怪物攻击玩家
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyHpManager enemy = other.gameObject.GetComponent<EnemyHpManager>();
-            AttackByEnemy(enemy);
+            NearAttackByEnemy(enemy);
         }
     }
     
-    //近战怪物攻击玩家
-    private void AttackByEnemy(EnemyHpManager enemy)
+    //怪物碰撞攻击玩家
+    private void NearAttackByEnemy(EnemyHpManager enemy)
     {
         //满足攻击间隔则攻击
         if (enemy.countAttackDelta <= 0)
         {
-            Debug.Log("EnemyAttackStay");
+            Debug.Log("EnemyAttack");
             hp -= enemy.damage;
             enemy.countAttackDelta = enemy.attackDelta;
         }

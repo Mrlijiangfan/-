@@ -4190,6 +4190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  direction: {x: 0, y: 0}
 --- !u!1 &1505893248
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,6 +5143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   damage: 10
+  countAttackDelta: 0
+  attackDelta: 1
   hpText: {fileID: 698558430}
 --- !u!50 &2043898444
 Rigidbody2D:
@@ -5218,8 +5221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballistic: 0
-  canShortAttack: 0
-  canFarAttack: 0
+  canShortAttack: 1
+  canFarAttack: 1
+  isShortAttacking: 0
+  shortAttackDelta: 0.5
 --- !u!1 &2045051877
 GameObject:
   m_ObjectHideFlags: 0

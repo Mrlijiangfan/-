@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerInput = new PlayerInput();
+        //控制单例
+        if(player == null) player = this;
+        else Destroy(gameObject);
     }
 
     private void OnEnable()
@@ -36,9 +39,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        //控制单例
-        if(player == null) player = this;
-        else Destroy(gameObject);
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
