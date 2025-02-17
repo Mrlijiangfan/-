@@ -50,7 +50,7 @@ public class PLayerAttack : MonoBehaviour
     private void GetNearestEnemy()
     {
         if (EnemyManager.enemyManager.enemies == null) return;
-        countCheckDelta = EnemyManager.enemyManager.checkDelta;
+        countCheckDelta = EnemyManager.enemyManager.checkDelta / 3;
         var distanceSmall = float.MaxValue;
         var distanceNow = 0f;
         Enemy enemyNearest = null;
@@ -62,7 +62,6 @@ public class PLayerAttack : MonoBehaviour
             enemyNearest = enemy;
         }
         _nearestEnemy = enemyNearest;
-        Debug.Log(_nearestEnemy);
     }
 
     public void AttackShort(InputAction.CallbackContext callbackContext)
