@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMove : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     public float moveSpeed;//子弹飞行速度
-    public Vector2 direction;//发射方向
 
     private void Update()
     {
@@ -16,7 +15,7 @@ public class BulletMove : MonoBehaviour
     //子弹移动
     private void Move()
     {
-        transform.Translate(direction * (moveSpeed * Time.deltaTime));
+        transform.Translate(Vector2.up * (moveSpeed * Time.deltaTime));
     }
     
 }

@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class UIManager : MonoBehaviour
 {
     private int _currentUIIndex;//当前选中的UI画布的索引
-    public static bool PauseGame;//是否暂停游戏窗口
-    public static bool KillGame;//是否结束游戏窗口
+    public bool pauseGame;//是否暂停游戏窗口
+    public bool killGame;//是否结束游戏窗口
     
     private PlayerInput _playerInput;
     [SerializeField]private PLayerAttack playerAttack;
@@ -66,19 +67,23 @@ public class UIManager : MonoBehaviour
     {
         if (_currentUIIndex != 2)
         {
-            PauseGame = true;
+            pauseGame = true;
             Time.timeScale = 0;//时停
+            if(Player.player != null) Player.player.gameObject.SetActive(false);
+            if(EnemyManager.enemyManager != null) EnemyManager.enemyManager.gameObject.SetActive(false);
         }
         else
         {
-            PauseGame = false;
+            pauseGame = false;
             Time.timeScale = 1;//关闭时停
+            if(Player.player != null) Player.player.gameObject.SetActive(true);
+            if(EnemyManager.enemyManager != null) EnemyManager.enemyManager.gameObject.SetActive(true);
         }
     }
     
     private void ControllKill()
     {
-        KillGame = (_currentUIIndex < 2);
+        killGame = (_currentUIIndex < 2);
     }
 
     private void ChangeUIByJ(InputAction.CallbackContext callbackContext)

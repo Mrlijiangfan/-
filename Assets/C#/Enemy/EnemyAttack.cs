@@ -18,14 +18,4 @@ public class EnemyAttack : MonoBehaviour
     {
 
     }
-
-    public void AttackShort()
-    {
-        Debug.Log("近战攻击");
-    }
-
-    public void AttackFar()
-    {
-        Debug.Log("远程攻击");
-    }
 }

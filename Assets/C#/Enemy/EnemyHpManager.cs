@@ -57,7 +57,6 @@ public class EnemyHpManager : MonoBehaviour
         //满足攻击间隔则攻击
         if (player.countAttackDelta <= 0)
         {
-            Debug.Log("PlayerAttack");
             hp -= player.damage;
             player.countAttackDelta = player.attackDelta;
         }
