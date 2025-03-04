@@ -24,13 +24,15 @@ public class PLayerAttack : MonoBehaviour
     public float farAttackDelta;//远程攻击间隔
     private float _countFarAttackDelta;//计数远程攻击间隔
     public GameObject bulletPrefab;//子弹预制体 
+    public int maxPlayerBullet;//子弹上限
     private Enemy _nearestEnemy;//最近的敌人
     private float countCheckDelta;//获取最近敌人的判定间隔
     
     
+    
     private void Start()
     {
-        
+        InitPlayerBulletPool();//初始化玩家子弹对象池
     }
 
     private void Update()
@@ -64,6 +66,11 @@ public class PLayerAttack : MonoBehaviour
         _nearestEnemy = enemyNearest;
     }
 
+    private void InitPlayerBulletPool()
+    {
+        CharacterPool.characterPool.InitPool(bulletPrefab, maxPlayerBullet);
+    }
+    
     public void AttackShort(InputAction.CallbackContext callbackContext)
     {
         if (!canShortAttack) return;
@@ -82,8 +89,7 @@ public class PLayerAttack : MonoBehaviour
         if (_countFarAttackDelta > 0) return;
         if (!_nearestEnemy) return;//敌人不存在时不能攻击
         //子弹转向最近的敌人的方向
-        Instantiate(bulletPrefab, transform.position, Quaternion.FromToRotation(Vector3.up, (_nearestEnemy.transform.position - transform.position).normalized));
+        CharacterPool.characterPool.Shoot(bulletPrefab, transform.position, Quaternion.FromToRotation(Vector3.up, (_nearestEnemy.transform.position - transform.position).normalized));
         _countFarAttackDelta = farAttackDelta;
-
     }
 }
